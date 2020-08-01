@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jouer à la roulette</title>
+
+    <link rel="stylesheet" href="projet.css">
+    <script>
+    
+    // fonction pour le nombre alaeatoire que l'ordi va tiré    
+    function nbreAlea(min,max){
+        let nombreAlea= Math.floor(Math.random()*(max-min));
+
+        return nombreAlea
+    } 
+
+    //fonction qui va donner le nombre que le client va choisir dans la roulette  
+    function choixDuNombre(){
+        let selections=document.querySelector("select");
+        let nbreChoisie=selections.options[selections.selectedIndex].value;
+
+        return nbreChoisie;
+    }
+
+    //fonction qui va s'occuper du gain du client s'il gagne 
+    function gagner(){
+        //Utilisation des variables globales qui sont commentée dans le script du body 
+        gain=typeInput[0].value*2;
+        argentClient+=gain;
+        typeInput[2].value=argentClient;
+        argentOrdi-=parseInt(gain);
+        typeInput[3].value=argentOrdi;
+        argentGagner=argentGagner*1 + parseInt(gain);
+        typeInput[5].value=parseInt(argentGagner);
+
+        if(argentOrdi<0){
+            argentOrdi=0;
+            typeInput[3].value=argentOrdi;
+        }
+        
+        
+        humeur.src=sourceHumeur[1];
+
+        alert("vous avez gagné: "+gain+" milles FCFA");
+    }
+                    
+    //fonction qui va s'occuper du perte du client s'il perd                
+    function Perte(){
+        //Utilisation des variables globales qui sont commentée dans le script du body
+        argentClient-=perte;
+        argentOrdi=parseInt(argentOrdi)+parseInt(perte);
+        typeInput[3].value=argentOrdi
+        typeInput[2].value=argentClient;
+        argentPerdu=argentPerdu*1 + parseInt(perte);
+        typeInput[6].value= argentPerdu
+
+
+        if(argentClient<0){
+            argentClient=0;
+            typeInput[2].value=argentClient;
+        }
+
+
+        humeur.src=sourceHumeur[2];
+        alert("vous avez perdu : perte= "+perte);
+    }
+    
+    //fonction qui va ajouter des éléments au tableau récapitulatif
+    function ajout(){
+        //Création d'un noeud tr
+        let ligne=document.createElement("tr");
+        
+        
+        if(nombreChoisie==100){
+            //Insertion des cellules td dans tr
+            ligne.innerHTML="<td>Pair</td><td>"+nombreTiré+"</td><td>"+gain+"</td><td>"+perte+"</td>";
+        }
+        else if(nombreChoisie==200){
+            //Insertion des cellules td dans tr
+            ligne.innerHTML="<td>Impair</td><td>"+nombreTiré+"</td><td>"+gain+"</td><td>"+perte+"</td>";
+        }
+        else{
+            //Insertion des cellules td dans tr
+            ligne.innerHTML="<td>"+nombreChoisie+"</td><td>"+nombreTiré+"</td><td>"+gain+"</td><td>"+perte+"</td>";
+        
+        }
+        
+        //Ajout  de la ligne tr dans le tableau
+        document.querySelector("table").appendChild(ligne);
+    }
+    
+    // fonction pour diaporama de l'entête
+    function affichage(){
+        
+        let imgEntete=document.getElementById("imgEntete");
+        
+        imgEntete.src=sourceImageEntete[i];
+        i++;
+
+        if(i==3){
+            i=0;
+        }    
+    }
+    
+    </script>
+</head>
+<body>
+    <img  alt="">
+    
+    <div id="principal">
+        <div id="entete"> <img src="./Images/entete casino.jpg" alt="" id="imgEntete"></div>
+        <div id="contenu">
+            <div id="imageG"> <img id="rouletteG" src="./Images/imageG et D.gif" alt=""> </div>
+            <div id="imageD"> <img id="rouletteG" src="./Images/imageG et D.gif" alt=""></div>
+            <p>
+                Salut et bienvenue dans notre site vous pouvez jouer à la roulette et gagner  de l'argent virtuel bien-sûr.
+                <br>
+                Les regles du jeu sont simples :
+            </p>     
+            <p>
+                <ol>
+                    <li>Vous disposez de 100 mille Francs au départ</li>
+                    <li>Choisir un chiffre dans la roulette ou choisir "Pair" et "Impair"</li>
+                </ol>
+            </p>
+            <p>
+                Les conditions de victoire sont les suivantes:
+                    <ol>
+                    <li>Si vous choisissez "Pair" ou "Impair" et que la roulette tombe sur un nombre pair ou impair <br>
+                    vous gagner le double de votre mise</li>
+                    <li>Si vous choisissez un nombre compris entre 1 et 36 que la roulette tombe sur votre choix alors <br>
+                    vous gagnez une somme égale à votre mise multiplie par 35 </li>
+                    <li>Si aucune de ces conditons n'est remplie vous perdez </li>
+                    </ol>
+            </p>
+            <p class="paraHumeur">
+                <img src="./Images/rouletteG et D.gif" alt="" id="humeur" >
+            </p>  
+            <form action="">
+            <p>
+                <label for="">Faites votre Choix</label> <br>
+                <select name="choix" id="">
+                    <option value="100">Pair</option>
+                    <option value="200">Impair</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                </select>
+            
+                <input type="number" placeholder="Entrer le montant la mise en milliers de FCFA" style="width: 10cm;">
+                <input type="button" value="GO!">
+                <br>
+
+                <div>
+                    <label for="">Argent du client en milliers de FCFA</label>
+                    <input type="text" id="champTexte">
+                </div>
+                <br>
+                <div>
+                    <label for="">Argent de l'ordi en milliers de FCFA</label>
+                    <input type="text" id="champTexte">
+                </div>
+                <br>
+                <div>
+                    <label for="">Nombre tiré par la machine</label>
+                    <input type="text" id="champTexte">
+                </div>
+            
+                </form>
+                <br>
+                <table border="1">
+                    <caption>Tableau Récapitulatif</caption>
+                    <tr>
+                        <th>Numero Choisie</th>
+                        <th>Numero Tiré par la machine</th>
+                        <th>Gain</th>
+                        <th>Perte</th>
+                    </tr>
+
+                </table>
+                <br>
+                <br>
+                <form action="">
+                    <label for="">Gain Totale</label>
+                    <input type="text">
+                    <label for="">Perte Totale</label>
+                    <input type="text">
+                </form>
+                
+                
+                <script>
+                    //Référencement de tous les input de mon document
+                    let typeInput=document.getElementsByTagName("input");
+
+                    
+                    //Images pour l'entête diaporama  
+                    let sourceImageEntete= new Array("./Images/entete changeant.jpg","./Images/entete casino.jpg","./Images/banderole entete.jpg")
+                    let i=0;
+
+                    //Variable qui va stocker la valeur retournée par la fonction choixDuNombre()
+                    let nombreChoisie;
+                    
+                    //Variable qui va stocker la valeur retournée par la fonction nbreAlea()
+                    let nombreTiré;
+                    
+                    //va stocker les gains du client
+                    let gain=0;
+                    
+                    //va stocker les pertes du client
+                    let perte=0;
+                    
+                    //va stocker le montant que le client posséde(son portefeuille)
+                    let argentClient=typeInput[2].value;
+                    
+                    //va stocker l'argent que l'ordinateur va sera les pertes du client 
+                    let argentOrdi=typeInput[3].value;
+
+                    //va stocker le gain total du client
+                    let argentGagner=typeInput[5].value;
+
+                    //va stocker les pertes totales du client
+                    let argentPerdu=typeInput[6].value;
+                    
+                    //Initialisation de l'argent du client à 100
+                    argentClient=100;
+                    
+                    //Initialisation de l'argent de l'ordinateur
+                    argentOrdi=0;
+                    
+                    //Affectation dans le champ qui va contenir l'argent du client et de l'ordinateur
+                    typeInput[2].value=argentClient;
+                    typeInput[3].value=argentOrdi;
+
+
+                    //Désactivation de la zone de texte qui va contenir l'argent du client, de l'ordi, de nombreTiré, de l'argebt total gagner er perdu 
+                    typeInput[2].blur();
+                    typeInput[3].blur();
+                    typeInput[4].blur();
+                    typeInput[5].blur();
+                    typeInput[6].blur();
+
+                    //Déclaration et Réferencement de l'image dans le contenu qui va afficher l'humeur du client suivant qu'il gagne ou perd
+                    let humeur=document.getElementById("humeur");
+                    
+                    //Déclaration et Initialisation du tableau qui va contenir les images de l'etat de l'humeur du client 
+                    let sourceHumeur=new Array("./Images/humeur0.gif","./Images/humeur1.jpg","./Images/humeur2.jpg")
+                    
+                    //Appel de la fonction affichage tout les 1 seconde
+                    setInterval(affichage,1000);
+                   
+                   //Activation de l'événement du clique sur le button go
+                    typeInput[1].onclick=function(){
+
+                        //Affectation et convertion en entier de la variable perte
+                        perte=parseInt(typeInput[0].value);
+
+                        //Utilisation de la fonction nbreAlea sur l'intervalle 0 à 36
+                        nombreTiré=nbreAlea(0,36);
+
+                        //Affectation dans le champ qui va contenir le nombre tiré par l'ordi(nombre Aleatoire)
+                        typeInput[4].value=nombreTiré;
+                        
+                        //Utilisation de la fonction choixDuNombre fait par le client
+                        nombreChoisie=choixDuNombre();
+                        
+                        //Entrer dans les conditions de victoire et de perte suivant du client             
+                        if(nombreChoisie==100){
+                            // je tiens à préciser que pour les valeurs Pair et Impair j'ai choisie de leur donne les valeurs de 100 et 200
+                            if(nombreTiré%2 == 0){
+                                //Appel de fonction gagner() 
+                                gagner();
+                                //Initialisation de perte pour le tableau récapitulatif de la fonction ajout()
+                                perte=0;
+                                }
+                            else{
+                                //Appel de fonction Perte()
+                                Perte();
+                                //Initialisation de gain pour le tableau récapitulatif de la fonction ajout()
+                                gain=0;
+                                }
+                            
+                        }
+                        else if(nombreChoisie==200){
+                                if(nombreTiré%2 != 0 ){
+                                   ganger();
+                                   perte=0;
+                                }
+                                else{
+                                Perte();
+                                gain=0;
+                                }
+                        }
+                        else if(nombreTiré==nombreChoisie){
+                            // Affectation du calcul au gain j'ai multiplié par 1 pour ne pas avoir les deux valeurs concactenés  
+                            gain= typeInput[0].value*1 + typeInput[0].value*35;
+                            //Affection du gain au client
+                            argentClient+=gain;
+                            //Affectation dans le champ qui va contenir l'argent du client
+                            typeInput[2].value=argentClient;
+                            //Ajout de l'image adequat pour représenter l'humeur du client dans un gain ou perte
+                            humeur.src=sourceHumeur[0];
+                            //Initialisation de perte pour le tableau récapitulatif de la fonction ajout()
+                            perte=0;
+                            //Affection et diminution des gain de l'argent de l'ordinateur
+                            argentOrdi-=parseInt(gain);
+                            typeInput[3].value=argentOrdi;
+                            //Message d'alerte pour le gain
+                            alert("vous avez gagner: "+gain+" milles FCFA");
+                            }
+                        else if(nombreTiré!=nombreChoisie || nombreTiré==0){
+                            Perte();
+                            gain=0;
+
+                        } 
+
+                        
+                        //Appel de la fonction ajout pour le tableau récapitulatif de l'historique du client
+                        ajout();
+                    
+                    }
+                </script>
+            </p> 
+
+        </div>
+        
+        <div id="piedPage"><img src="./Images/entete casino.jpg" alt="" id="imgEntete"></div>
+    </div>
+</body>
+</html>
